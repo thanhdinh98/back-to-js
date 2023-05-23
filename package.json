@@ -1,0 +1,23 @@
+{
+  "name": "mq_sample",
+  "version": "1.0.0",
+  "description": "RabbitMQ sample",
+  "main": "main.js",
+  "scripts": {
+    "start": "./build/src/index.js",
+    "build": "tsc"
+  },
+  "keywords": [
+    "RabbitM"
+  ],
+  "author": "dnthanh1298",
+  "license": "ISC",
+  "dependencies": {
+    "@types/amqplib": "^0.10.1",
+    "@types/locks": "^0.2.1",
+    "@types/node-cron": "^3.0.7",
+    "amqplib": "^0.10.3",
+    "locks": "^0.2.2",
+    "node-cron": "^3.0.2"
+  }
+}

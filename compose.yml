@@ -1,0 +1,36 @@
+networks:
+  default:
+    name: sample
+
+services:
+  rabbit_mq:
+    image: "rabbitmq:3-management"
+    environment:
+      - RABBITMQ_DEFAULT_USER=sample
+      - RABBITMQ_DEFAULT_PASS=samplepass
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    networks:
+      default: null
+    deploy:
+      resources:
+        limits:
+          memory: 1GB
+
+  node_app:
+    container_name: node_app
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+    depends_on:
+      rabbit_mq:
+        condition: service_healthy
+    environment:
+      - RBMQ_URI=amqp://sample:samplepass@rabbit_mq:5672
+    networks:
+      default: null
+    command: "src/cmd/index.js"
+        

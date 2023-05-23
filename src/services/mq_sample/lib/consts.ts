@@ -1,0 +1,1 @@
+export let SAMPLE_QUEUE = "sample_queue"
